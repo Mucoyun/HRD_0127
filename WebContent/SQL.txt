@@ -1,0 +1,36 @@
+drop table reservation0127;
+drop table bookinfo0127;
+
+create table reservation0127(
+	lentno varchar2(6) not null primary key,
+	custname varchar2(20),
+	bookno number(4),
+	outdate date,
+	indate date,
+	status char(1)
+);
+
+insert into reservation0127 values('1','김한국',101,'20191201','','1');
+insert into reservation0127 values('2','진선미',102,'20191204','20191206','2');
+insert into reservation0127 values('3','장소미',201,'20191001','','1');
+insert into reservation0127 values('4','최소망',103,'20191109','','1');
+insert into reservation0127 values('5','이동국',301,'20191224','20191225','2');
+insert into reservation0127 values('6','이소라',105,'20191208','20191211','2');
+
+
+create table bookinfo0127(
+	bookno number(4) not null primary key,
+	author varchar2(20),
+	bookname varchar2(20)
+);
+
+insert into bookinfo0127 values(101,'박작가','시스템분석');
+insert into bookinfo0127 values(102,'김작가','전산개론');
+insert into bookinfo0127 values(103,'이작가','마케팅개론');
+insert into bookinfo0127 values(105,'황작가','사회학');
+insert into bookinfo0127 values(201,'최작가','역사학');
+insert into bookinfo0127 values(301,'오작가','전산영어');
+
+alter table reservation0127 add class char(1);
+
+ 
