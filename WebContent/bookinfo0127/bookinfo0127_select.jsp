@@ -39,7 +39,7 @@
 		}
 	%>
 	<section>
-		<h2>학사정보 목록</h2>
+		<h2>도서 정보 조회</h2>
 		<p id="count">총 <%=no %>권의 도서 정보가 있습니다.</p><hr>
 		<table id="s_table">
 			<tr>
