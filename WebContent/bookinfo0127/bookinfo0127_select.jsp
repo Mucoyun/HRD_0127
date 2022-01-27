@@ -52,7 +52,7 @@
 			<%
 			try{
 				no = 0;
-				String sql = "select bookno,author,bookname from bookinfo0127";
+				String sql = "select bookno,author,bookname from bookinfo0127 order by bookno asc";
 				pstmt = conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				while(rs.next()){

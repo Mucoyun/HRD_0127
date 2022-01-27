@@ -57,7 +57,7 @@
 			<%
 			try{
 				no = 0;
-				String sql = "select a.lentno,a.custname,a.bookno,b.bookname,to_char(a.outdate,'yyyy-mm-dd'),to_char(a.indate,'yyyy-mm-dd'),a.status,a.class from reservation0127 a,bookinfo0127 b where a.bookno=b.bookno";
+				String sql = "select a.lentno,a.custname,a.bookno,b.bookname,to_char(a.outdate,'yyyy-mm-dd'),to_char(a.indate,'yyyy-mm-dd'),a.status,a.class from reservation0127 a,bookinfo0127 b where a.bookno=b.bookno  order by bookno asc";
 				pstmt = conn.prepareStatement(sql);
 				rs=pstmt.executeQuery();
 				while(rs.next()){
@@ -74,7 +74,8 @@
 					if(custname == null){custname="";}
 					if(outdate == null){outdate="";}
 					if(indate == null){indate="";}
-					if(status == null){status="";}
+					if(status.equals("1")){status="대출";}
+					else if(status.equals("2")){status="반납";}
 					if(class1 == null){class1="";}
 					
 					%>
