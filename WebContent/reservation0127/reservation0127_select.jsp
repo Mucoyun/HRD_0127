@@ -14,7 +14,7 @@
 	</style>
 	<script>
 		function retry() {
-			location.href = "/HRD_0127/bookinfo0127/bookinfo0127_insert.jsp"
+			location.href = "/HRD_0127/reservation0127/reservation0127_insert.jsp"
 		}
 	</script>
 </head>
