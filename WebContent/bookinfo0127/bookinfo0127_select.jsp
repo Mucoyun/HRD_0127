@@ -47,6 +47,7 @@
 				<th width="200">도서코드</th>
 				<th width="100">저자</th>
 				<th width="300">도서이름</th>
+				<th width="100">관리</th>
 			</tr>
 			<%
 			try{
@@ -65,6 +66,10 @@
 						<td><a href="/HRD_0127/bookinfo0127/bookinfo0127_update.jsp?send_bookno=<%=bookno%>"><%=bookno %></a></td>
 						<td><%=author %></td>
 						<td><%=bookname %></td>
+						<td>
+						<a href="/HRD_0127/bookinfo0127/bookinfo0127_delete.jsp?send_bookno=<%=bookno%>"
+						onclick="if(!confirm('정말로 삭제하시겠습니까?')){ return false; }">삭제</a>
+						</td>
 					</tr>
 					<%
 				}

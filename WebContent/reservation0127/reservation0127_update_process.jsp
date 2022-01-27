@@ -18,20 +18,20 @@
 		String class1 = request.getParameter("class1");
 		
 		try{
-			String sql = "insert into reservation0127 values(?,?,?,?,?,?,?)";
+			String sql = "update reservation0127 set custname=?,bookno=?,outdate=?,indate=?,status=?,class=? where lentno=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, lentno);
-			pstmt.setString(2, custname);
-			pstmt.setString(3, bookno);
-			pstmt.setString(4, outdate);
-			pstmt.setString(5, indate);
-			pstmt.setString(6, status);
-			pstmt.setString(7, class1);
+			pstmt.setString(1, custname);
+			pstmt.setString(2, bookno);
+			pstmt.setString(3, outdate);
+			pstmt.setString(4, indate);
+			pstmt.setString(5, status);
+			pstmt.setString(6, class1);
+			pstmt.setString(7, lentno);
 			
 			pstmt.executeUpdate();
 			
 			%><script>
-				alert("등록이 완료되었습니다.");
+				alert("수정이 완료되었습니다.");
 				location.href = "/HRD_0127/reservation0127/reservation0127_select.jsp"
 			</script><%
 		}catch(SQLException e){

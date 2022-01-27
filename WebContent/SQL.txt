@@ -33,4 +33,8 @@ insert into bookinfo0127 values(301,'오작가','전산영어');
 
 alter table reservation0127 add class char(1);
 
- 
+select 
+	lentno,custname,bookno,to_char(outdate,'yyyy-mm-dd'),to_char(indate,'yyyy-mm-dd'),status,class 
+from 
+	reservation0127
+;

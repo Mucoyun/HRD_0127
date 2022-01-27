@@ -14,7 +14,7 @@
 	</style>
 	<script>
 		function retry() {
-			location.href = "/HRD_0127/reservation0127/reservation0127_insert.jsp"
+			location.href = "/HRD_0127/bookinfo0127/bookinfo0127_insert.jsp"
 		}
 	</script>
 </head>
@@ -52,6 +52,7 @@
 				<th width="200">반납일자</th>
 				<th width="100">대출상태</th>
 				<th width="100">등급</th>
+				<th width="100">관리</th>
 			</tr>
 			<%
 			try{
@@ -69,6 +70,13 @@
 					String indate = rs.getString(6);
 					String status = rs.getString(7);
 					String class1 = rs.getString(8);
+					
+					if(custname == null){custname="";}
+					if(outdate == null){outdate="";}
+					if(indate == null){indate="";}
+					if(status == null){status="";}
+					if(class1 == null){class1="";}
+					
 					%>
 					<tr>
 						<td><%=no %></td>
@@ -80,6 +88,10 @@
 						<td><%=indate %></td>
 						<td><%=status %></td>
 						<td><%=class1 %></td>
+						<td>
+							<a href="/HRD_0127/reservation0127/reservation0127_delete.jsp?send_lentno=<%=lentno%>"
+							onclick="if(!confirm('정말로 삭제하시겠습니까?')){ return false; }">삭제</a>
+						</td>
 					</tr>
 					<%
 				}

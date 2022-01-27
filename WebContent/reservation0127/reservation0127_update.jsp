@@ -17,13 +17,13 @@
 				alert("도서코드가 입력되지 않았습니다.");
 				document.iu_form.bookname.focus();
 			}else{
-				document.iu_form.action = "reservation0127_insert_process.jsp";
+				document.iu_form.action = "reservation0127_update_process.jsp";
 				document.iu_form.submit();
 			}
 			
 		}
 		function retry() {
-			document.iu_form.reset();
+			location.href = "/HRD_0127/reservation0127/reservation0127_select.jsp"
 		}
 		function booknoCheck() {
 			document.iu_form.submit();
@@ -56,6 +56,8 @@
 	<%@ include file="/header.jsp" %>
 	<%@ include file="/nav.jsp" %>
 	<%
+		String send_lentno = request.getParameter("send_lentno");
+	
 		String bookno = request.getParameter("bookno");
 		String bookname = "";	
 		
@@ -77,7 +79,21 @@
 		
 		
 		try{
-			String sql = "select bookname from bookinfo0127 where bookno=?";
+			String sql = "select lentno,custname,bookno,to_char(outdate,'yyyy-mm-dd'),to_char(indate,'yyyy-mm-dd'),status,class from reservation0127 where lentno=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, send_lentno);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				lentno = rs.getString(1);
+				custname = rs.getString(2);
+				bookno = rs.getString(3);
+				outdate = rs.getString(4);
+				indate = rs.getString(5);
+				status = rs.getString(6);
+				class1 = rs.getString(7);
+			}
+			
+			sql = "select bookname from bookinfo0127 where bookno=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bookno);
 			rs = pstmt.executeQuery();
@@ -94,14 +110,24 @@
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+		
+		if(bookno == null){bookno="";}
+		
+		if(lentno == null){lentno="";}
+		if(custname == null){custname="";}
+		if(outdate == null){outdate="";}
+		if(indate == null){indate="";}
+		if(status == null){status="1";}
+		if(class1 == null){class1="S";}
+		
 	%>
 	<section>
-		<h2>도서 대출 예약 정보 등록 화면</h2>
+		<h2>도서 대출 예약 정보 변경 화면</h2>
 		<form name="iu_form" method="post" action="reservation0127_insert.jsp">
 			<table id="iu_table">
 				<tr>
 					<th>대출번호</th>
-					<td><input type="text" name="lentno" value="<%=lentno %>"></td>
+					<td><input type="text" name="lentno" value="<%=lentno %>" readonly></td>
 					<th>고객성명</th>
 					<td><input type="text" name="custname" value="<%=custname %>"></td>
 				</tr>
@@ -123,7 +149,7 @@
 						<input id = "inD"  type="radio" name="status" value="1" <%if(status.equals("1")){%> checked <%} %> onclick="statusClick()"> 대출
 						<input id = "outD" type="radio" name="status" value="2" <%if(status.equals("2")){%> checked <%} %> onclick="statusClick()"> 반납
 					</td>
-					<th>등급</th>
+					<th>도서이름</th>
 					<td>
 						<select name="class1">
 							<option value="S" <%if(class1.equals("S")){%> selected <%} %>>S</option>
@@ -135,7 +161,7 @@
 				</tr>
 				<tr>
 					<td id="btntd" colspan="4">
-						<button type="button" onclick="check()">저장</button>
+						<button type="button" onclick="check()">변경</button>
 						<button type="button" onclick="retry()">취소</button>
 					</td>
 				</tr>
